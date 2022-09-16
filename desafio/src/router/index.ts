@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:id',
     name: 'MovieDetail',
-    props: true,
+    props: route => ({title: route.query.title, poster_path: route.query.poster_path}),
     component: MovieDetail
   },
 ]
