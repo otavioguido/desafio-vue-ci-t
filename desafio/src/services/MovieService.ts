@@ -12,8 +12,5 @@ const apiClient = axios.create({
 export default {
     getMovies() {
         return apiClient.get('')
-    },
-    getMovie(id: string) {
-        return apiClient.get(`/` + id)
     }
 }

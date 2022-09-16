@@ -1,5 +1,6 @@
 <template>
-    <router-link :to="{ name: 'MovieDetail', params: { id: movie.id}}">
+    <router-link
+        :to="{ name: 'MovieDetail', params: { id: movie.id}, query: {title: movie.title, poster_path: movie.poster_path}}">
         <div class="movie-card">
             <h4>{{ movie.title }}</h4>
             {{ movie.poster_path}}
@@ -22,14 +23,15 @@ export default defineComponent({
 
 <style scoped>
 .movie-card {
-  padding: 20px;
-  width: 300px;
-  cursor: pointer;
-  border: 1px solid #39495c;
-  margin-bottom: 18px;
+    padding: 20px;
+    width: 300px;
+    cursor: pointer;
+    border: 1px solid #39495c;
+    margin-bottom: 18px;
 }
+
 .movie-card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.01);
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
 }
 </style>
