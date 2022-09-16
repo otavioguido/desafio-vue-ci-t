@@ -4,7 +4,6 @@
 </template>
 
 <script lang="ts">
-// import MovieService from '@/services/MovieService';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
