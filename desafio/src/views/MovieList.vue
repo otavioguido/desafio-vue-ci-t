@@ -1,9 +1,6 @@
 <template>
     <div class="movies">
-        <MovieCard v-for="(movie, index) in results" :key="index" :movie="movie" />
-        <!-- <div v-for="result in results" :key="result.id">
-            {{ result }}
-        </div> -->        
+        <MovieCard v-for="movie in results" :key="movie.id" :movie="movie" />  
     </div>
 </template>
 

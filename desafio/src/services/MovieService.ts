@@ -14,6 +14,6 @@ export default {
         return apiClient.get('')
     },
     getMovie(id: string) {
-        return apiClient.get(`/results/?id=` + id)
+        return apiClient.get(`/` + id)
     }
 }
