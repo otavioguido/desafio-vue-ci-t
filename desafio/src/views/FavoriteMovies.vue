@@ -5,20 +5,16 @@
 </template>
 
 <script lang="ts">
-import MovieCard from '@/components/MovieCard.vue';
 import { defineComponent } from 'vue';
+import MovieCard from '@/components/MovieCard.vue';
 
 export default defineComponent({
-    name: 'MovieList',
     components: {
-        MovieCard
-    },
-    created () {
-        this.$store.dispatch('fetchMovies')
+        MovieCard,
     },
     computed: {
         movies() {
-            return this.$store.state.movies 
+            return this.$store.state.favoriteMovies
         }
     },
 })
