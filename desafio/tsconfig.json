@@ -9,6 +9,8 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

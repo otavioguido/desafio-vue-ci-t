@@ -1,0 +1,19 @@
+{
+    "movies": [
+        { 
+            "title": "fall", 
+            "poster_path": "test", 
+            "id": 0
+        },
+        { 
+            "title": "fullmetal", 
+            "poster_path": "test0", 
+            "id": 1
+        },
+        { 
+            "title": "matrix", 
+            "poster_path": "test0", 
+            "id": 1
+        }
+    ]
+}

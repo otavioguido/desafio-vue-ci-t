@@ -1,7 +1,13 @@
 <template>
-    <MovieFilter />
+    <MovieFilter data-testid='movie-list-filter'/>
     <div class="movies">
-        <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />  
+        <router-link
+        class="movie-link" 
+        v-for=" movie in movies" 
+        :key="movie.id"
+        :to="{ name: 'MovieDetail', params: { id: movie.id}, query: {title: movie.title, poster_path: movie.poster_path, id: movie.id}}">
+            <MovieCard data-testid="movie" :movie=" movie" />
+        </router-link>
     </div>
 </template>
 
@@ -17,7 +23,7 @@ export default defineComponent({
         MovieCard,
         MovieFilter
     },
-    created () {
+    created() {
         this.$store.dispatch('fetchMovies')
     },
     computed: {
@@ -27,7 +33,7 @@ export default defineComponent({
             if (this.$store.state.filter.length === 0) {
                 return this.$store.state.movies
             }
-            
+
             for (const movie of this.$store.state.movies) {
                 if (movie.title.toLowerCase().startsWith(this.$store.state.filter.toLowerCase())) {
                     filteredMovies.push(movie)
@@ -41,8 +47,12 @@ export default defineComponent({
 
 <style scoped>
 .movies {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.movie-link {
+  color: #2c3e50;
+  text-decoration: none;
 }
 </style>
