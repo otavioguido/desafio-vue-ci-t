@@ -2,8 +2,8 @@
   <div class="app">
     <nav>
       <router-link :to="{ name: 'MovieList'}">Movies</router-link> | 
-      <router-link :to="{ name: 'FavoriteMovies'}">Favorite</router-link>
-    </nav>
+      <router-link :to="{ name: 'FavoriteMovies'}">Favorite</router-link>      
+    </nav>    
     <router-view/>
   </div>
 </template>
