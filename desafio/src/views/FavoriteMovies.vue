@@ -1,7 +1,10 @@
 <template>
-    <MovieFilter />
+    <MovieFilter data-testid="favorite-movie-list-filter"/>
     <div class="movies">
-        <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+        <router-link class="movie-link"  v-for=" movie in movies" :key="movie.id"
+            :to="{ name: 'MovieDetail', params: { id: movie.id}, query: {title: movie.title, poster_path: movie.poster_path, id: movie.id}}">
+            <MovieCard data-testid="favorite-movie" :movie="movie" />
+        </router-link>
     </div>
 </template>
 
@@ -40,5 +43,9 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.movie-link {
+  color: #2c3e50;
+  text-decoration: none;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="filter">
-        <label for="filter" id="filter-label">Filter</label>
-        <input id="filter" v-model="filter" type="text" placeholder="Movie's name" @keyup="updateFilter">
+        <label data-testid="filter-label" for="filter" id="filter-label">Filter</label>
+        <input data-testid="filter-input" id="filter" v-model="filter" type="text" placeholder="Movie's title" @keyup="updateFilter">
     </div>
 </template>
 
@@ -11,17 +11,14 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     data() {
         return {
-            filter: ''
+            filter: this.$store.state.filter
         }
     },
     methods: {
         updateFilter() {
             this.$store.dispatch('updateFilter', this.filter);
         }
-    },
-    created () {
-        this.filter = this.$store.state.filter;
-    },
+    }
 })
 </script>
 
