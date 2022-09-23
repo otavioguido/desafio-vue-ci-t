@@ -1,7 +1,12 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import MovieService from '@/services/MovieService'
 import { Movie } from '@/types/index.js';
-import { createStore as vuexCreateStore } from 'vuex'
+import { createStore as vuexCreateStore, Commit } from 'vuex'
+
+export interface State {
+  favoriteMovies: Array<Movie>;
+  movies: Array<Movie>;
+  filter: string;
+}
 
 const storeConfiguration = {
   state: {
@@ -12,39 +17,39 @@ const storeConfiguration = {
   getters: {
   },
   mutations: {
-    ADD_MOVIE(state: any, movie: Movie): void {
+    ADD_MOVIE(state: State, movie: Movie): void {
       state.favoriteMovies.push(movie)
     },
-    REMOVE_MOVIE(state: any, movie: Movie): void {
+    REMOVE_MOVIE(state: State, movie: Movie): void {
       const movieIdIndex = state.favoriteMovies.indexOf(movie)
       state.favoriteMovies.splice(movieIdIndex, 1)
     },
-    SET_MOVIES(state: any, movies: Array<Movie>): void {
+    SET_MOVIES(state: State, movies: Array<Movie>): void {
       state.movies = movies
     },
-    SET_FILTER(state: any, filter: string): void {
+    SET_FILTER(state: State, filter: string): void {
       state.filter = filter
     }
   },
   actions: {
-    updateFavorite({ commit, state }: { commit: Function, state: any }, id: string): void {
-      const movie = (state.favoriteMovies as Array<Movie>).filter(m => m['id'] === parseInt(id))
+    updateFavorite({ commit, state }: { commit: Commit, state: State }, id: string): void {
+      const movie = state.favoriteMovies.filter(m => m['id'] === parseInt(id))
       
       if(movie.length === 0) {
-        commit('ADD_MOVIE', (state.movies as Array<Movie>).find(m => m['id'] === parseInt(id)))
+        commit('ADD_MOVIE', state.movies.find(m => m['id'] === parseInt(id)))
       }else {
         commit('REMOVE_MOVIE', movie.pop())
       }       
     },
-    fetchMovies({ commit }: { commit: Function }): void {
+    fetchMovies({ commit }: { commit: Commit }): void {
       MovieService.getMovies()
         .then(response => {
           commit('SET_MOVIES', response.data.results)
-        }).catch((err: any) => {
+        }).catch((err: Error) => {
             console.log(err)
         })      
     },
-    updateFilter({ commit }: { commit: Function }, filter: string): void {
+    updateFilter({ commit }: { commit: Commit }, filter: string): void {
       commit('SET_FILTER', filter)
     }
   },
@@ -58,7 +63,7 @@ const defaultOverrides = {
   }
 }
 
-function makeState(initialState: any, overrideState: any) {
+function makeState(initialState: unknown, overrideState: any) {
   return {
     ...(typeof initialState === 'function' ? initialState(): initialState),
     ...overrideState()
